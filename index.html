@@ -12,7 +12,16 @@
 <style type="text/css">
 
         #mynetwork {
-            width: 60%;
+            width: 80%;
+            height: 100%;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+        
+        #myfilter {
+            width: 19%;
             height: 100%;
             background-color: #ffffff;
             border: 1px solid lightgray;
@@ -20,11 +29,50 @@
             float: left;
         }
 
-        
+        #myfilter h1 {
+            text-align: center;
+        }
 
-        
+        #myfilter p {
+            text-align: left;
+            text-decoration: underline;
+        }
 
-        
+        #myfilter .filter-entry {
+            display: block;
+            width: auto;
+            padding: 2%;
+            border: 1px solid lightgray;
+        }
+
+        #myfilter .filter-name {
+            width: 60%;
+            margin-left: 3%;
+        }
+
+        #myfilter .filter-type {
+            margin-left: 3%;
+        }
+
+        #myfilter .filter-keep {
+            margin-left: 3%;
+            padding-top: 3%;
+        }
+
+        #myfilter .filter-button {
+            display: block;
+            text-align: center;
+            margin: auto;
+            margin-top: 30px;
+        }
+
+        #myfilter .filter-button button{
+            width: auto;
+            margin-left: 3%;
+            margin-right: 3%;
+            text-align: center;
+            font-size: large;
+        }
 </style>
 
 </head>
@@ -32,49 +80,45 @@
 <body>
 <div id = "mynetwork"></div>
 
+<div id = "myfilter">
+    <h1>Filtre</h1>
+    <div class="filter-entry">
+        <p>Filtre par Nom :</p>
+        <input class="filter-name" type="text" id="name" placeholder="Pseudonyme"/>
+    </div>
 
+    <div class="filter-entry">
+        <p>Filtre par Type :</p>
+        <div class="filter-type">
+            <input type="checkbox" id="couples" name="couples" checked>
+            <label for="couples">Couples</label>
+        </div>
+        <div class="filter-type">
+            <input type="checkbox" id="parents" name="parents" checked>
+            <label for="parents">Parents</label>
+        </div>
+        <div class="filter-type">
+            <input type="checkbox" id="sugar" name="sugar" checked>
+            <label for="sugar">Sugar Parents</label>
+        </div>
+    </div>
+
+    <div class="filter-entry">
+        <div class="filter-keep">
+            <input type="checkbox" id="keep" name="keep" checked>
+            <label for="keep">Garder uniquement les personnes en relation</label>
+        </div>
+    </div>
+
+    <div class="filter-button">
+        <button type="button" onclick="drawFullGraph()">Reset</button>
+        <button type="button" onclick="drawFilterGraph()">Filtrer</button>
+    </div>
+</div>
+
+<script src="network.js"></script>
 <script type="text/javascript">
-
-    // initialize global variables.
-    var edges;
-    var nodes;
-    var network; 
-    var container;
-    var options, data;
-
-    
-    // This method is responsible for drawing the graph, returns the drawn network
-    function drawGraph() {
-        var container = document.getElementById('mynetwork');
-        
-        
-
-        // parsing and collecting nodes and edges from the python
-        nodes = new vis.DataSet([{"id": 0, "label": "Tchouki", "shape": "dot"}, {"id": 1, "label": "Uma", "shape": "dot"}, {"id": 2, "label": "Loupinette", "shape": "dot"}, {"id": 3, "label": "Ewy", "shape": "dot"}, {"id": 4, "label": "Blank", "shape": "dot"}, {"id": 5, "label": "Boo2chou", "shape": "dot"}, {"id": 6, "label": "Ellio", "shape": "dot"}, {"id": 7, "label": "Alea", "shape": "dot"}, {"id": 8, "label": "Aliwan", "shape": "dot"}, {"id": 9, "label": "Aoi", "shape": "dot"}, {"id": 10, "label": "Archanon", "shape": "dot"}, {"id": 11, "label": "Audy", "shape": "dot"}, {"id": 12, "label": "Coin", "shape": "dot"}, {"id": 13, "label": "Ebene", "shape": "dot"}, {"id": 14, "label": "Galdo", "shape": "dot"}, {"id": 15, "label": "Kalhen", "shape": "dot"}, {"id": 16, "label": "Leo", "shape": "dot"}, {"id": 17, "label": "Linakoon", "shape": "dot"}, {"id": 18, "label": "Lucy", "shape": "dot"}, {"id": 19, "label": "Maggy", "shape": "dot"}, {"id": 20, "label": "Maxo", "shape": "dot"}, {"id": 21, "label": "Moohn", "shape": "dot"}, {"id": 22, "label": "Nowee", "shape": "dot"}, {"id": 23, "label": "Para", "shape": "dot"}, {"id": 24, "label": "Rihyette", "shape": "dot"}, {"id": 25, "label": "tpm", "shape": "dot"}]);
-        edges = new vis.DataSet([{"arrows": "to", "from": 0, "to": 18, "width": 2}, {"arrows": "to", "from": 0, "to": 2, "width": 2}, {"arrows": "to", "from": 0, "to": 23, "width": 2}, {"arrows": "to", "from": 0, "to": 8, "width": 2}, {"arrows": "to", "from": 1, "to": 3, "width": 2}, {"arrows": "to", "from": 1, "to": 2, "width": 2}, {"arrows": "to", "from": 1, "to": 22, "width": 2}, {"arrows": "to", "from": 2, "to": 0, "width": 2}, {"arrows": "to", "from": 2, "to": 3, "width": 2}, {"arrows": "to", "from": 2, "to": 14, "width": 2}, {"arrows": "to", "from": 2, "to": 1, "width": 2}, {"arrows": "to", "from": 3, "to": 2, "width": 2}, {"arrows": "to", "from": 3, "to": 1, "width": 2}, {"arrows": "to", "from": 3, "to": 22, "width": 2}, {"arrows": "to", "from": 3, "to": 21, "width": 2}, {"arrows": "to", "from": 7, "to": 13, "width": 2}, {"arrows": "to", "from": 7, "to": 15, "width": 2}, {"arrows": "to", "from": 7, "to": 10, "width": 2}, {"arrows": "to", "from": 8, "to": 0, "width": 2}, {"arrows": "to", "from": 10, "to": 7, "width": 2}, {"arrows": "to", "from": 12, "to": 24, "width": 2}, {"arrows": "to", "from": 12, "to": 22, "width": 2}, {"arrows": "to", "from": 13, "to": 15, "width": 2}, {"arrows": "to", "from": 13, "to": 7, "width": 2}, {"arrows": "to", "from": 14, "to": 2, "width": 2}, {"arrows": "to", "from": 14, "to": 24, "width": 2}, {"arrows": "to", "from": 15, "to": 13, "width": 2}, {"arrows": "to", "from": 15, "to": 7, "width": 2}, {"arrows": "to", "from": 16, "to": 22, "width": 2}, {"arrows": "to", "from": 17, "to": 22, "width": 2}, {"arrows": "to", "from": 18, "to": 0, "width": 2}, {"arrows": "to", "from": 21, "to": 22, "width": 2}, {"arrows": "to", "from": 21, "to": 3, "width": 2}, {"arrows": "to", "from": 21, "to": 24, "width": 2}, {"arrows": "to", "from": 22, "to": 17, "width": 2}, {"arrows": "to", "from": 22, "to": 21, "width": 2}, {"arrows": "to", "from": 22, "to": 12, "width": 2}, {"arrows": "to", "from": 22, "to": 1, "width": 2}, {"arrows": "to", "from": 22, "to": 16, "width": 2}, {"arrows": "to", "from": 22, "to": 3, "width": 2}, {"arrows": "to", "from": 23, "to": 0, "width": 2}, {"arrows": "to", "from": 24, "to": 14, "width": 2}, {"arrows": "to", "from": 24, "to": 12, "width": 2}, {"arrows": "to", "from": 24, "to": 21, "width": 2}, {"arrows": "to", "color": "red", "from": 0, "to": 1, "width": 2}, {"arrows": "to", "color": "red", "from": 0, "to": 3, "width": 2}, {"arrows": "to", "color": "red", "from": 0, "to": 11, "width": 2}, {"arrows": "to", "color": "red", "from": 0, "to": 16, "width": 2}, {"arrows": "to", "color": "red", "from": 15, "to": 16, "width": 2}, {"arrows": "to", "color": "red", "from": 9, "to": 21, "width": 2}, {"arrows": "to", "color": "red", "from": 19, "to": 22, "width": 2}, {"arrows": "to", "color": "green", "from": 4, "to": 0, "width": 2}, {"arrows": "to", "color": "green", "from": 0, "to": 4, "width": 2}]);
-
-        // adding nodes and edges to the graph
-        data = {nodes: nodes, edges: edges};
-
-        var options = {"edges": {"smooth": false}};
-        
-        
-
-        
-
-        network = new vis.Network(container, data, options);
-	 
-        
-
-
-        
-
-        return network;
-
-    }
-
-    drawGraph();
-
+    drawFullGraph();
 </script>
 </body>
 </html>
