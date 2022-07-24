@@ -17,14 +17,13 @@ function drawFilterGraph() {
         (couple && !e.color) || (parent && e.color == "red") || (sugar && e.color == "green"));
 
     // Name filtering
-    filter = document.getElementById("name").value;
+    separators = [' ', '\\\+', '-', '/', ','];
+    filter = document.getElementById("name").value.split(new RegExp(separators.join('|'), 'g')).map((a) => a.toLowerCase());
+    filter = nodes.filter( n => filter.includes(n.label.toLowerCase())).map(e => e.id);
     if(filter){
-        node = nodes.filter( n => n.label == filter)[0];
-        if(node) {
-            edges = edges.filter( e => e.from == node.id || e.to == node.id);
-        } else {
-            edges = [];
-        }
+        edges = edges.filter( e => filter.includes(e.from) || filter.includes(e.to));
+    } else {
+        edges = [];
     }
 
     // Filter nodes to correspond to edges

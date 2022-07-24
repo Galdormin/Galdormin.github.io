@@ -34,9 +34,16 @@
             text-align: center;
         }
 
+        #myfilter h2 {
+            text-align: left;
+            font-size: large;
+            text-decoration: underline;
+        }
+
         #myfilter p {
             text-align: left;
-            text-decoration: underline;
+            font-size: small;
+            font-style: italic;
         }
 
         #myfilter .filter-entry {
@@ -48,9 +55,9 @@
 
         #myfilter .filter-name {
             font-size: medium;
-            width: auto;
-            margin-left: 10%;
-            margin-right: 10%;
+            width: 90%;
+            margin-left: 5%;
+            margin-right: 5%;
         }
 
         #myfilter .filter-type {
@@ -90,12 +97,13 @@
 <div id = "myfilter">
     <h1>FILTRE</h1>
     <div class="filter-entry">
-        <p>Filtre par Nom :</p>
+        <h2>Filtre par Nom :</h2>
         <input class="filter-name" type="text" id="name" placeholder="Pseudonyme"/>
+        <p>Vous pouvez rechercher plusieurs pseudos avec : Tchouki + Loupinette</p>
     </div>
 
     <div class="filter-entry">
-        <p>Filtre par Type :</p>
+        <h2>Filtre par Type :</h2>
         <div class="filter-type">
             <input type="checkbox" id="couples" name="couples" checked>
             <label for="couples">Couples</label>
