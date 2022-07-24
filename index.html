@@ -1,32 +1,33 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@latest/styles/vis-network.css" type="text/css" />
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vis-network@latest/dist/vis-network.min.js"> </script>
-<center>
-<h1></h1>
-</center>
 
 <!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
 <script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
 
 <style type="text/css">
 
+        body {
+            background-color: #fff;
+            display: block;
+            margin: 0px;
+        }
+
         #mynetwork {
-            width: 80%;
-            height: 100%;
-            background-color: #ffffff;
-            border: 1px solid lightgray;
-            position: relative;
+            width: 85%;
             float: left;
         }
         
         #myfilter {
-            width: 19%;
-            height: 100%;
-            background-color: #ffffff;
-            border: 1px solid lightgray;
+            width: 14.5%;
+            height: calc(100vh - 2px);
+            background-color: #f8f9fa;
+            border: 1px solid #252425;
             position: relative;
-            float: left;
+            float: right;
+            font-family: 'Roboto';
         }
 
         #myfilter h1 {
@@ -46,8 +47,10 @@
         }
 
         #myfilter .filter-name {
-            width: 60%;
-            margin-left: 3%;
+            font-size: medium;
+            width: auto;
+            margin-left: 10%;
+            margin-right: 10%;
         }
 
         #myfilter .filter-type {
@@ -72,6 +75,10 @@
             margin-right: 3%;
             text-align: center;
             font-size: large;
+            border-radius: 0.3rem;
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
         }
 </style>
 
@@ -81,7 +88,7 @@
 <div id = "mynetwork"></div>
 
 <div id = "myfilter">
-    <h1>Filtre</h1>
+    <h1>FILTRE</h1>
     <div class="filter-entry">
         <p>Filtre par Nom :</p>
         <input class="filter-name" type="text" id="name" placeholder="Pseudonyme"/>
