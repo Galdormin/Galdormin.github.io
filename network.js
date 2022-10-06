@@ -72,8 +72,6 @@ function drawFilterGraph() {
     filter = nodes.filter( n => filter.includes(n.label.toLowerCase())).map(e => e.id);
     if(filter){
         edges = edges.filter( e => filter.includes(e.from) || filter.includes(e.to));
-    } else {
-        edges = [];
     }
 
     // Filter nodes to correspond to edges
