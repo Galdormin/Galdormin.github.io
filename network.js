@@ -64,7 +64,7 @@ function drawFilterGraph() {
     parent = document.getElementById("parents").checked;
     sugar = document.getElementById("sugar").checked;
     edges = edges.filter( e => 
-        (couple && !e.color) || (parent && e.color == "red") || (sugar && e.color == "green"));
+        (couple && e.color == "blue") || (parent && e.color == "red") || (sugar && e.color == "green"));
 
     // Name filtering
     separators = [' ', '\\\+', '-', '/', ','];
