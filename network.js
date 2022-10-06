@@ -7,9 +7,9 @@ const GID = 0;
 
 const COLORS = {"Parent": "red", "Sugar Parent": "green", "Couple": "blue"};
 
-const jsonData = fetch(`https://docs.google.com/spreadsheets/d/${SHEETID}/gviz/tq?tqx=out:json`)
-.then(res => res.text())
-.then(text => JSON.parse(text.substr(47).slice(0, -2)).table);
+const DATA = fetch(`https://docs.google.com/spreadsheets/d/${SHEETID}/gviz/tq?tqx=out:json`)
+    .then(res => res.text())
+    .then(text => JSON.parse(text.substr(47).slice(0, -2)).table);
 
 function getNetworkFromCSV() {
 
@@ -19,6 +19,8 @@ function getNetworkFromCSV() {
         .then(res => res.text())
         .then(text => JSON.parse(text.substr(47).slice(0, -2)).table);
     */
+
+    DATA.then(res => jsonData = res);
 
     // Get color for each column
     color = jsonData.rows[0].c.slice(1).map(c => COLORS[c.v]);
